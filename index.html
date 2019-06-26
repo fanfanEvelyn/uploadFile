@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="./index.js"></script>
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      display: flex;
+      box-sizing: border-box;
+      text-align: center;
+    }
+
+    .add_img {
+      width: 6.25rem;
+      height: 6.25rem;
+      margin: 0px auto;
+    }
+
+    .sel_modal {
+      display: flex;
+      box-sizing: border-box;
+    }
+
+    .sel_modal .sel_modal_mask {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 10;
+      background: rgba(0, 0, 0, 0.7);
+      display: none;
+    }
+
+    .sel_modal .show_mask {
+      display: block;
+      z-index: 9999;
+    }
+
+    .sel_modal .hide {
+      transform: translateY(160%);
+    }
+
+    .sel_modal .show {
+      transform: translateY(0%);
+    }
+
+    .sel_modal .sel_modal_contain {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      background: white;
+      /* transform: translateY(160%); */
+      transition: all 0.4s ease;
+      z-index: 9999;
+      height: 15vh;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .sel_modal .sel_modal_contain p {
+      text-align: center;
+      width: 100%;
+      height: 7vh;
+      line-height: 7vh;
+      color: #007aff;
+      font-size: 1.125rem
+    }
+  </style>
+</head>
+
+<body>
+  <input type="file" accept="image/*" @change="imgchang" ref="inputFile">
+  <div class="container">
+    <div class="add_img" id="showM">
+      <img src="./image/add.png">
+    </div>
+    <div class="sel_modal">
+      <div class="sel_modal_mask" id="showMask"></div>
+      <div class="sel_modal_contain hide" id="showC">
+        <p id="paizhao" data-type="camera" style="border-bottom: 1px solid #b6b1b1;">拍照</p>
+        <p id="xiangce" data-type="gallery">相册</p>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
+<script>
+  const showM = document.getElementById("showM")
+  const showMask = document.getElementById("showMask")
+  const showC = document.getElementById("showC")
+  const pz = document.getElementById("paizhao")
+  const xc = document.getElementById("xiangce")
+  showM.onclick = function () {
+    showC.classList.add("show")
+    showMask.classList.add("show_mask")
+    showC.classList.remove("hide")
+  }
+  showMask.onclick = function () {
+    showC.classList.add("hide")
+    showMask.classList.remove("show_mask")
+    showC.classList.remove("show")
+  }
+  pz.onclick = function () {
+    var type = pz.getAttribute('data-type');
+    console.log(type)
+  }
+  xc.onclick = function () {
+    var type = xc.getAttribute('data-type');
+    console.log(type)
+  }
+
+  function imgchang(e) {
+    console.log(e)
+  }
+</script>
